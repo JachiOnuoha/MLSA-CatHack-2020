@@ -5,26 +5,52 @@ import { TextField } from 'office-ui-fabric-react/lib/TextField';
 
 // Just a comment
 const App: React.FC = () => {
-  const apiKey = '6278138fbcab4a0592dcc44774ec259f';
-  const endpoint = 'https://faceid-workshop.cognitiveservices.azure.com/face/v1.0/detect';
-  const params = `returnFaceId=true&returnFaceLandmarks=false&returnFaceAttributes=age,gender`;
+  const apiKey = 'API KEY';
+  const endpoint = 'ENDPOINT';
+  const params = "includeTextDetails=true";
   const [url, setUrl] = React.useState('');
-  const[payload, setPayload] = React.useState<any[]>();
+  // const[payload, setPayload] = React.useState<any[]>();
 
   const ImageAPI= (): Promise<void> | void => {
-    fetch (`${endpoint}?${params}`, {
+    fetch (`${endpoint}`, {
         method: 'POST',
         headers: {
           'Ocp-Apim-Subscription-Key': apiKey,
           'Content-Type': 'application/json',
         },
-        body:JSON.stringify({url: url}),
+        // eslint-disable-next-line
+        body:JSON.stringify({source: url}),
    }
     ).then(async (response: Response) =>{
         if(response.ok){
-            const result = await response.json();
-            setPayload(result);
-            console.log(result)
+            const result = await response.headers; // comeback to this later
+            const getUrl = "OPERATION-LOCATION RESPONSE HEADER"
+            const attempts = 10;
+            let tries = 0;
+            const pause = 6;
+
+            while(tries < attempts){
+              fetch (`${getUrl}`, {
+                method: 'GET',
+                headers: {
+                  'Ocp-Apim-Subscription-Key': apiKey,
+                  'Content-Type': 'application/json',
+                }
+           }
+            ).then(async (response: Response) => {
+              if(response.ok){
+                const value = await response.json();
+                console.log(value);
+              }
+              else{
+                console.log("Error at final stage");
+              }
+            })
+            await(pause);
+              tries++;
+            }
+            // // setPayload(result);
+            // console.log(result)
        }
         else{
            console.log(url);

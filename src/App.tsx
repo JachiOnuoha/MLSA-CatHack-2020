@@ -8,7 +8,6 @@ const App: React.FC = () => {
   // Required information for the API calls
   const apiKey = 'API-KEY';
   const endpoint = 'ENDPOINT';
-  const params = "includeTextDetails=true";
   const [url, setUrl] = React.useState('');
   // const[payload, setPayload] = React.useState<any[]>();
 
@@ -75,10 +74,10 @@ const App: React.FC = () => {
   // Displays UI
   return(
     <div className='App'>
-        <title>Image-ine</title>
+        <title>AluCard</title>
         <div className='App-content'>
-            <h1>Welcome to Image-ine!</h1>
-            <p>The world's leading image analysis software developed by a guy named Jachi</p>
+            <h1>Welcome to AluCard!</h1>
+            <p>This is a cool demo by the Microsoft Learn Student Ambassadors for the CatHacks 2020 hackathon</p>
           </div>
           <div className='App-content'>
           <form>
